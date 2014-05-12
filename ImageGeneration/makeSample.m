@@ -49,4 +49,4 @@ while(1)
 end
 
 close(hwaitbar);
-tiffwrite(Sample, tiffname);
+tiffwriteStack(Sample, tiffname);
