@@ -1,6 +1,8 @@
 function resultimg = trans_img(img, offset, zoom, cut, rotate,color, xx,yy)
     imgsize = size(img);
-    [img_xx img_yy] = meshgrid(1:imgsize(1),1:imgsize(2));
+    center_x = imgsize(1)/2;
+    center_y = imgsize(1)/2;
+    [img_xx img_yy] = meshgrid((1:imgsize(1))-center_x,(1:imgsize(2))-center_y);
     outimgsize = size(xx);
     %resultimg = zeros(outimgsize);
     transmat = [1/zoom(1) 0; 0 1/zoom(2)]*[cos(rotate) -sin(rotate); sin(rotate) cos(rotate)] ...
