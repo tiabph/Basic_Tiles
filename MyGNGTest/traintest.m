@@ -1,7 +1,8 @@
 %train a map cell
 addpath('..\ImageGeneration\');
-inputsize = [3 3];
-map = CreateMapCell([15 15], inputsize);
+inputsize = [4 4];
+%Create a new map
+map = CreateMapCell([20 20], inputsize);
 inputset = double(imgbuf);
 inputset = inputset./max(inputset(:));
 
@@ -34,8 +35,10 @@ for roundcnt = 1:trainround
 
         if(mod(traincnt, lamda)==0)
 %             hist(map.response(:),-1:0.05:1); drawnow
-            subplot(1,2,1); hist(map.error(:),20); drawnow
-            subplot(1,2,2); imagesc(map.age); drawnow
+            subplot(2,2,1); hist(map.error(:),20); drawnow
+            subplot(2,2,2); imagesc(map.age); drawnow
+            subplot(2,2,3); imagesc(input); drawnow
+            subplot(2,2,4); imagesc(map.response); drawnow
 %             waitbar(traincnt/inputnum, h);
             fwrite(1,'.');
         end
