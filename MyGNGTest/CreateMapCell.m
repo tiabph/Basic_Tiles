@@ -8,7 +8,7 @@ function map = CreateMapCell(mapsize, inputsize)
     map.inputWeight = cell(mapsize);
     for m =1:mapsize(1)
         for n=1:mapsize(2)
-            map.inputWeight{m,n} = (rand(inputsize)-0.5)*0.1;
+            map.inputWeight{m,n} = (rand(inputsize)-0.5)*0.025;
         end
     end
     
@@ -25,14 +25,17 @@ function map = CreateMapCell(mapsize, inputsize)
     
     %map response map
     map.response = zeros(mapsize);
+    
+    %map age map
+    map.age = zeros(mapsize);
 end
 
 %init connection map with gaussian function
 function connmap = InitConnectionMap(mapsize, m,n)
     baselevel = -0.2;
-    peak = 0.6;
+    peak = 0.4;
     sigma1 = 3;
-    sigma2 = 30;
+    sigma2 = 15;
     [xx yy] = meshgrid(1:mapsize(1), 1:mapsize(2));
     connmap = (peak-baselevel).*exp(-((xx-m).^2+(yy-n).^2)/sigma1^2) ...
         + baselevel.*exp(-((xx-m).^2+(yy-n).^2)/sigma2^2);

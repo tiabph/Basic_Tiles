@@ -1,15 +1,22 @@
 %train a map cell
+addpath('..\ImageGeneration\');
+inputsize = [3 3];
+map = CreateMapCell([15 15], inputsize);
 inputset = double(imgbuf);
 inputset = inputset./max(inputset(:));
 
-inputnum = size(inputset,3);
+inputnum = 10000;
 nodeSelectNum = 10;
 
-lamda = 10;
-trainround = 100;
-
+lamda = 300;
+trainround = 1000;
+% h=waitbar(0,['round:' num2str(roundcnt) ' progress...']);
+% hfigure = figure(1);
 for roundcnt = 1:trainround
-    h=waitbar(0,['round:' num2str(roundcnt) ' progress...']);
+    inputset = GenSampleBuf(inputsize,inputnum);
+    inputset = inputset./max(inputset(:));
+%     waitbar(0,h, ['round:' num2str(roundcnt) ' progress...']);
+    fwrite(1,['R' num2str(roundcnt) ' :']);
     for traincnt = 1:inputnum
         %prepare the input data
         input = inputset(:,:,traincnt);
@@ -20,15 +27,20 @@ for roundcnt = 1:trainround
         %find the top nodes
         response = map.response;
         reslist = response(:);
-        [~, index] = sort(reslist);
+        [~, index] = sort(reslist,'descend');
         nodelist = index(1:nodeSelectNum);
 
         map = UpdateNodes(map, input, nodelist);
 
         if(mod(traincnt, lamda)==0)
-            imagesc(map.response); drawnow
-            waitbar(traincnt/inputnum,h);
+%             hist(map.response(:),-1:0.05:1); drawnow
+            subplot(1,2,1); hist(map.error(:),20); drawnow
+            subplot(1,2,2); imagesc(map.age); drawnow
+%             waitbar(traincnt/inputnum, h);
+            fwrite(1,'.');
         end
     end
-    close(h)
+    disp('Done.');
 end
+
+% close(h)

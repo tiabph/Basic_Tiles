@@ -1,5 +1,5 @@
 function [map] = TestMapCell(map, inputInt)
-    connfactor = 0.2;
+    connfactor = 0.01;
     mapsize = map.mapsize;
     inputWeight = map.inputWeight;
     connection = map.connection;

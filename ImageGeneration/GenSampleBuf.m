@@ -1,4 +1,5 @@
 function Sample = GenSampleBuf(samplesize, samplenum, mask, filepath)
+load('handwritingnumbers_t10k.mat');
 [xx yy] = meshgrid(1:100, 1:100);
 % a = CreateAnimationRand(imgbuf, xx,yy);
 tilesize = samplesize(1);   %6*6
@@ -11,7 +12,7 @@ if(nargin<3)
 end
 Sample = zeros(tilesize, tilesize, sampleSize);
 scnt = 0;
-hwaitbar=waitbar(0,'progress...');
+% hwaitbar=waitbar(0,'progress...');
 while(1)
     if(scnt>sampleSize)
         break
@@ -40,7 +41,7 @@ while(1)
                             break
                         end
                         Sample(:,:,scnt) = ttile;
-                        waitbar(scnt/sampleSize, hwaitbar);
+%                         waitbar(scnt/sampleSize, hwaitbar);
                     end
                 end
             end
@@ -50,7 +51,7 @@ while(1)
     end
 end
 
-close(hwaitbar);
+% close(hwaitbar);
 
 if(nargin>=4)%write file
     tiffwriteStack(Sample, filepath);
