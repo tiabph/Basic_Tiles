@@ -4,6 +4,7 @@ tilesize = 8;   %6*6
 sampleSize = 10000;
 tiffname = 'out.tif';
 
+Threshold = 10;
 mask = [-1/8, -1/8, -1/8; ...
     -1/8, 1, -1/8; ...
     -1/8, -1/8, -1/8];
@@ -32,7 +33,7 @@ while(1)
                 end
                 for n=1:tilesize:(100-tilesize)
                     ttile = timg2(m:m+tilesize-1,n:n+tilesize-1);
-                    if(sum(abs(ttile(:)))>10000)
+                    if(sum(abs(ttile(:)))>Threshold)
                         scnt = scnt+1;
                         if(scnt>sampleSize)
                             break
