@@ -6,7 +6,7 @@ tilesize = samplesize(1);   %6*6
 sampleSize = samplenum;
 % tiffname = 'out.tif';
 
-Threshold = 10;
+Threshold = 1;
 if(nargin<3)
     mask = [1];
 end
@@ -35,7 +35,7 @@ while(1)
                 end
                 for n=1:tilesize:(100-tilesize)
                     ttile = timg2(m:m+tilesize-1,n:n+tilesize-1);
-                    if(sum(abs(ttile(:)))>Threshold)
+                    if(sum(abs(ttile(:)))/length(ttile(:))>Threshold)
                         scnt = scnt+1;
                         if(scnt>sampleSize)
                             break

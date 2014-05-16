@@ -7,7 +7,7 @@ function result = CreateAnimationRand(imgbuf, xx,yy)
     rotaterange = [-pi/3; pi/3];
     colorrange = [0,1; 0.3,0.7];
     
-    img = imgbuf{floor(rand()*length(imgbuf))};
+    img = imgbuf{ceil(rand()*length(imgbuf))};
     pointnum = round(GetRandPar(pointrange));
     alen = round(GetRandPar(alenrange));
     offset = GetRandParEx(offsetrange, pointnum);

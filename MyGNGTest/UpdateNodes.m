@@ -1,4 +1,4 @@
-function map = UpdateNodes(map, input, nodelist)
+function map = UpdateNodes(map, input, nodelist, connnodelist)
 %update nodes' weight and connection
     
     mapsize = map.mapsize;
@@ -29,8 +29,8 @@ function map = UpdateNodes(map, input, nodelist)
         
         %change the weight
         inputWeight = inputWeight + distance*weightRate;
-%         for tm = (nx-2):(nx+2)
-%             for tn = (ny-2):(ny+2)
+%         for tm = (nx-1):(nx+1)
+%             for tn = (ny-1):(ny+1)
 %                 if((tm~=nx || tn~=ny) && tm>0 && tn>0 && tm<=mapsize(1) && tn<=mapsize(2))
 %                     tdistance = input - map.inputWeight{tm, tn};
 %                     tdistance = tdistance - mean(tdistance(:));
@@ -57,6 +57,24 @@ function map = UpdateNodes(map, input, nodelist)
         map.connection{nx, ny} = connection;
         map.error(nx, ny) = error;
         map.response(nx, ny) = response;
+        map.age(nx, ny)=0;
+    end
+    
+    for m=1:length(connnodelist)
+        [nx ny] = ind2sub(mapsize, connnodelist(m));
+        
+        %node parameter
+        inputWeight = map.inputWeight{nx, ny};
+        response = map.response(nx, ny);
+        
+        distance = input - inputWeight;
+        distance = distance-mean(distance(:));
+        error = error*0.9 + norm(distance(:));
+        
+        %change the weight
+        inputWeight = inputWeight + distance*connRate;
+        
+        map.inputWeight{nx, ny} = inputWeight;
         map.age(nx, ny)=0;
     end
 end

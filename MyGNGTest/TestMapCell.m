@@ -28,4 +28,5 @@ function [map] = TestMapCell(map, inputInt)
     initresponse = initresponse+connresponse;
     %sigmoid response
     map.response = (1./(1+exp(-initresponse.*2))-0.5)*2;
+    map.connresponse = connresponse;
 end
