@@ -29,15 +29,15 @@ function map = UpdateNodes(map, input, nodelist)
         
         %change the weight
         inputWeight = inputWeight + distance*weightRate;
-        for tm = (nx-2):(nx+2)
-            for tn = (ny-2):(ny+2)
-                if((tm~=nx || tn~=ny) && tm>0 && tn>0 && tm<=mapsize(1) && tn<=mapsize(2))
-                    tdistance = input - map.inputWeight{tm, tn};
-                    tdistance = tdistance - mean(tdistance(:));
-                    map.inputWeight{tm, tn} = map.inputWeight{tm, tn} + tdistance*connRate;
-                end
-            end
-        end
+%         for tm = (nx-2):(nx+2)
+%             for tn = (ny-2):(ny+2)
+%                 if((tm~=nx || tn~=ny) && tm>0 && tn>0 && tm<=mapsize(1) && tn<=mapsize(2))
+%                     tdistance = input - map.inputWeight{tm, tn};
+%                     tdistance = tdistance - mean(tdistance(:));
+%                     map.inputWeight{tm, tn} = map.inputWeight{tm, tn} + tdistance*connRate;
+%                 end
+%             end
+%         end
         
         %change the connection
         fitness = sum(input(:).^2./input(:).*inputWeight(:));

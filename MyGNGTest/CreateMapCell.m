@@ -3,6 +3,10 @@ function map = CreateMapCell(mapsize, inputsize)
     
     %map size
     map.mapsize = mapsize;
+    %input size
+    map.inputsize = inputsize;
+    %reconstruction result
+    map.reconstruction = zeros(inputsize);
     
     %input weight of each nodes
     map.inputWeight = cell(mapsize);
