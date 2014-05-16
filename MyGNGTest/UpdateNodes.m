@@ -75,7 +75,7 @@ function map = UpdateNodes(map, input, nodelist, connnodelist)
         inputWeight = inputWeight + distance*connRate;
         
         map.inputWeight{nx, ny} = inputWeight;
-        map.age(nx, ny)=0;
+%         map.age(nx, ny)=0;
     end
 end
 
