@@ -1,13 +1,14 @@
 %train a map cell
 addpath('..\ImageGeneration\');
-inputsize = [3 3];
+inputsize = [5 5];
 %Create a new map
-map = CreateMapCell([15 15], inputsize);
+map = CreateMapCell([25 25], inputsize);
 inputset = double(imgbuf);
 inputset = inputset./max(inputset(:));
 
 inputnum = 10000;
 nodeSelectNum = ceil(map.mapsize(1).^2*0.05);
+connnodeSelectNum = nodeSelectNum*5;
 
 lamda = 300;
 trainround = 1000;
@@ -35,7 +36,7 @@ for roundcnt = 1:trainround
         connresponse = map.connresponse;
         connreslist = connresponse(:);
         [~, index] = sort(connreslist,'descend');
-        connnodelist = index(1:nodeSelectNum);
+        connnodelist = index(1:connnodeSelectNum);
 
         map = UpdateNodes(map, input, nodelist, connnodelist);
 
