@@ -2,8 +2,8 @@ function map = UpdateNodes(map, input, nodelist)
 %update nodes' weight and connection
     
     mapsize = map.mapsize;
-    weightRate = 0.01;
-    connRate = 0.001;
+    weightRate = 0.005;
+    connRate = 0.0001;
     input = (input-min(input(:)))./(max(input(:))-min(input(:)));
     if(any(isnan(input(:))))
         return
@@ -65,7 +65,7 @@ end
 function connmap = InitConnectionMap(mapsize, m,n)
     baselevel = -0.1;
     peak = 0.6;
-    sigma1 = 2;
+    sigma1 = 1;
     sigma2 = 10;
     [xx yy] = meshgrid(1:mapsize(1), 1:mapsize(2));
     connmap = (peak-baselevel).*exp(-((xx-m).^2+(yy-n).^2)/sigma1^2) ...

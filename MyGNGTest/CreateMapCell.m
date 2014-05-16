@@ -34,7 +34,7 @@ end
 function connmap = InitConnectionMap(mapsize, m,n)
     baselevel = -0.2;
     peak = 0.4;
-    sigma1 = 2;
+    sigma1 = 1;
     sigma2 = 10;
     [xx yy] = meshgrid(1:mapsize(1), 1:mapsize(2));
     connmap = (peak-baselevel).*exp(-((xx-m).^2+(yy-n).^2)/sigma1^2) ...
