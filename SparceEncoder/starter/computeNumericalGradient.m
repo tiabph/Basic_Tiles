@@ -21,7 +21,6 @@ numgrad = zeros(size(theta));
 size(theta)
 EPSILON = 1e-4;
 for i=1:size(theta)
-i
 memo = theta(i);
 theta(i) = memo + EPSILON;
 value1 = J(theta);

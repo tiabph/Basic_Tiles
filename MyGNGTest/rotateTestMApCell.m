@@ -7,7 +7,7 @@ mapsize = map.mapsize;
 resultbuf = zeros(mapsize(1), mapsize(2), timglen);
 anglelist = (1:timglen)./timglen.*260;
 
-for m = 1:round(timglen/2)
+for m = 1:round(timglen)
     timg = testimgbuf(:,:,m);
     timg = timg./max(timg(:));
     [map] = TestMapCell(map, timg);
@@ -33,10 +33,10 @@ imagesc(dirmap)
 colormap gray
 title('dir map');
 subplot(2,2,2)
-hist(dirmap(:), 30)
+hist(dirmap(:), 50)
 
 subplot(2,2,3)
 imagesc(ampmap)
 title( 'amp map');
 subplot(2,2,4)
-hist(ampmap(:), 30)
+hist(ampmap(:), 50)
