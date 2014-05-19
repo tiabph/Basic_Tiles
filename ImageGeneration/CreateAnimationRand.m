@@ -1,10 +1,10 @@
 function result = CreateAnimationRand(imgbuf, xx,yy)
-    pointrange = [2;1];
+    pointrange = [2;3];
     alenrange = [2;10];
-    offsetrange = [40,40; 60,60];
-    zoomrange = [2,2; 6,6];
+    offsetrange = [20,20; 30,30];
+    zoomrange = [1,1; 3,3];
     cutrange = [-0.1, -0.1; 0.1 0.1];
-    rotaterange = [-pi/3; pi/3];
+    rotaterange = [-pi/6; pi/6];
     colorrange = [0,1; 0.3,0.7];
     
     img = imgbuf{ceil(rand()*length(imgbuf))};

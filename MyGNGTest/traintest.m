@@ -3,8 +3,6 @@ addpath('..\ImageGeneration\');
 inputsize = [5 5];
 %Create a new map
 map = CreateMapCell([25 25], inputsize);
-inputset = double(imgbuf);
-inputset = inputset./max(inputset(:));
 
 inputnum = 10000;
 nodeSelectNum = ceil(map.mapsize(1).^2*0.05);

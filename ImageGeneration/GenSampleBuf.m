@@ -1,6 +1,7 @@
 function Sample = GenSampleBuf(samplesize, samplenum, mask, filepath)
 load('handwritingnumbers_t10k.mat');
-[xx yy] = meshgrid(1:100, 1:100);
+imgsize = 50;
+[xx yy] = meshgrid(1:imgsize, 1:imgsize);
 % a = CreateAnimationRand(imgbuf, xx,yy);
 tilesize = samplesize(1);   %6*6
 sampleSize = samplenum;
@@ -29,11 +30,11 @@ while(1)
             timg = timg./max(timg(:));
             timg2 = conv2(timg, mask, 'same');
             timg2 = timg2.*255;
-            for m=1:tilesize:(100-tilesize)
+            for m=1:tilesize:(imgsize-tilesize)
                 if(scnt>sampleSize)
                     break
                 end
-                for n=1:tilesize:(100-tilesize)
+                for n=1:tilesize:(imgsize-tilesize)
                     ttile = timg2(m:m+tilesize-1,n:n+tilesize-1);
                     if(sum(abs(ttile(:)))/length(ttile(:))>Threshold)
                         scnt = scnt+1;

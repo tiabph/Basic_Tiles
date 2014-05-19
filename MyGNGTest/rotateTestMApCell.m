@@ -5,6 +5,7 @@ testimgbuf = double(tiffread(testimg));
 timglen = size(testimgbuf,3);
 mapsize = map.mapsize;
 resultbuf = zeros(mapsize(1), mapsize(2), timglen);
+anglelist = (1:timglen)./timglen.*260;
 
 for m = 1:round(timglen/2)
     timg = testimgbuf(:,:,m);
@@ -20,7 +21,7 @@ for m=1:mapsize(1)
         tres = reshape(resultbuf(m,n,:),1,[]);
         posmax = find(tres==max(tres));
         posmax=posmax(1);
-        dirmap(m,n) = posmax;
+        dirmap(m,n) = anglelist(posmax);
         ampmap(m,n) = max(tres) - min(tres);
     end
 end
