@@ -1,7 +1,7 @@
 function resultimg = trans_img(img, offset, zoom, cut, rotate,color, xx,yy)
     imgsize = size(img);
-    center_x = imgsize(1)/2;
-    center_y = imgsize(1)/2;
+    center_x = imgsize(1)/2+0.5;
+    center_y = imgsize(1)/2+0.5;
     [img_xx img_yy] = meshgrid((1:imgsize(1))-center_x,(1:imgsize(2))-center_y);
     outimgsize = size(xx);
     %resultimg = zeros(outimgsize);
