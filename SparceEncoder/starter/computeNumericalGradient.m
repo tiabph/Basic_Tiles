@@ -20,15 +20,18 @@ numgrad = zeros(size(theta));
 
 size(theta)
 EPSILON = 1e-4;
+h=waitbar(0,'progress..');
 for i=1:size(theta)
-memo = theta(i);
-theta(i) = memo + EPSILON;
-value1 = J(theta);
-theta(i) = memo - EPSILON;
-value2 = J(theta);
-theta(i) = memo;
-numgrad(i) = (value1 - value2) ./ (2 * EPSILON);
+    memo = theta(i);
+    theta(i) = memo + EPSILON;
+    value1 = J(theta);
+    theta(i) = memo - EPSILON;
+    value2 = J(theta);
+    theta(i) = memo;
+    numgrad(i) = (value1 - value2) ./ (2 * EPSILON);
+    waitbar(i./length(theta),h);
 end
+close(h);
 
 
 %% ---------------------------------------------------------------
