@@ -13,7 +13,7 @@ hiddensize = 5;
 activebuff = zeros(hiddensize, hiddensize, patchnum);
 for m=1:patchnum
     tinput = patches(:,m);
-    tactive = W1*tinput;
+    tactive = W1*tinput+b1;
     activebuff(:,:,m) = reshape(tactive, hiddensize, []);
 end
 activebuff = activebuff ./ max(activebuff(:));
